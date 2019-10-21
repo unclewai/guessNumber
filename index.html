@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthy App</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<!-- BMI 頁面結構 -->
+<div id="page-bmi" data-role="page">
+
+    <!-- Header 頂部欄 -->
+    <div data-role="header">
+        <h1>猜猜隨機數</h1>
+    </div>
+
+    <!-- 內容 -->
+    <div data-role="content">
+        <h2>請猜一個1~100之內的整數</h2>
+        <input type="number" id="inputnum" style="text-align: center">
+        <br>
+        <button class="ui-btn ui-shadow" id="check">驗證數字</button>
+        <p style="text-align: center;">你已經試了<span id="count"></span>次</p>
+        <br>
+        <p style="text-align:center;"><span id="msg" style="font-size: 40px;"></span></p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="text-align: center;">答案是：<span id="answer"></span></p>
+    </div>
+
+</div>
+
+<script>
+    var num = 0;     
+    var count = 0;
+    $( document ).ready(function() {
+        num = getRandom(100);
+        $("#count").text(count);
+        $('#inputnum').focus();
+        $('#answer').text(num);
+    });
+    function getRandom(n){
+        return Math.floor(Math.random()*n+1)
+    };
+    $("#check" ).on( "click", function() {
+        var tmp  = $('#inputnum').val();
+        count++;
+        $('#count').text(count);        
+        if(tmp > num){
+            $('#msg').text('你猜數字比它大。');
+            $('#inputnum').focus();
+        }else if(tmp == num){
+            $('#msg').text('恭喜你，你贏了。');
+        }else{
+            $('#msg').text('你猜數字比它小。');
+            $('#inputnum').focus();
+        }
+    });
+
+</script>
+
+</body>
+</html>
